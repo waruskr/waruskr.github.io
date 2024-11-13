@@ -201,3 +201,9 @@ footer {
     color: #888;
     font-size: 0.9rem;
 }
+
+.player-count {
+    color: #888;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
