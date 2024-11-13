@@ -37,12 +37,8 @@ typeText();
 
 async function updatePlayerCount() {
     try {
-        // Use a CORS proxy that's more reliable for GitHub Pages
-        const response = await fetch('https://cors-anywhere.herokuapp.com/https://api.mcsrvstat.us/2/88.211.236.228:25672', {
-            headers: {
-                'Origin': 'https://waruskr.github.io'  // Replace with your actual GitHub Pages URL
-            }
-        });
+        // Using a different CORS proxy that's public
+        const response = await fetch('https://api.allorigins.win/raw?url=https://api.mcsrvstat.us/2/88.211.236.228:25672');
         const data = await response.json();
         
         console.log('Server data:', data);  // Keep this for debugging
