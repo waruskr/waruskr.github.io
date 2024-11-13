@@ -244,3 +244,21 @@ footer {
 .mod-link:hover {
     background-color: #4f4f4f;
 }
+
+.player-list {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.online-player {
+    display: inline-block;
+    background-color: #181818;
+    color: #a855f7;
+    padding: 0.2rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    border: 1px solid #2d2d2d;
+}
