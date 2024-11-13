@@ -37,27 +37,35 @@ typeText();
 
 async function updatePlayerCount() {
     try {
-        const response = await fetch('https://api.allorigins.win/raw?url=https://api.mcsrvstat.us/2/88.211.236.228:25672');
+        // Use a CORS proxy that's more reliable for GitHub Pages
+        const response = await fetch('https://cors-anywhere.herokuapp.com/https://api.mcsrvstat.us/2/88.211.236.228:25672', {
+            headers: {
+                'Origin': 'https://waruskr.github.io'  // Replace with your actual GitHub Pages URL
+            }
+        });
         const data = await response.json();
         
-        console.log('Server data:', data);
+        console.log('Server data:', data);  // Keep this for debugging
         
         const playerCountElement = document.querySelector('.player-count');
+        const playerList = document.querySelector('.player-list');
         
         if (data.online) {
             const currentPlayers = data.players?.online || 0;
             playerCountElement.textContent = `Players Online: ${currentPlayers}`;
 
-            // Update player list if players are online
-            if (data.players?.list) {
-                const playerList = document.querySelector('.player-list');
+            // Check if we have the list and it's not empty
+            if (data.players?.list && data.players.list.length > 0) {
                 playerList.innerHTML = data.players.list
                     .map(player => `<span class="online-player">${player}</span>`)
                     .join('');
+            } else {
+                // If no list is provided but players are online
+                playerList.innerHTML = `<span class="online-player">Players Online</span>`;
             }
         } else {
             playerCountElement.textContent = 'Players Online: 0';
-            document.querySelector('.player-list').innerHTML = '';
+            playerList.innerHTML = '';
         }
     } catch (error) {
         console.error('Error fetching player count:', error);
